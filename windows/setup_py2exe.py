@@ -361,8 +361,7 @@ def strip():
 
 @count_size_improvement
 def upx():
-    logger.warning('UPX compression is disabled')
-    return
+    logger.warning('UPX compression is mostly disabled')
 
     if fast:
         logger.warning('Fast mode: Skipped executable with UPX')
@@ -373,7 +372,8 @@ def upx():
         return
 
     logger.info('Compressing executables')
-    upx_files = recursive_glob('dist', ['*.exe', '*.dll', '*.pyd'])
+    #upx_files = recursive_glob('dist', ['*.exe', '*.dll', '*.pyd'])
+    upx_files = recursive_glob('dist', [''*sqlite*'])
     cmd = '{} {} {}'.format(UPX_EXE, UPX_OPTS, ' '.join(upx_files))
     run_cmd(cmd)
 
