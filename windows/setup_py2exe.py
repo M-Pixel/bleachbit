@@ -441,13 +441,14 @@ def shrink():
     clean_translations()
 
     try:
-        strip()
+        #strip()
+        pass
     except Exception:
         logger.exception(
             'Error when running strip. Does your PATH have MINGW with binutils?')
 
     if not fast:
-        upx()
+        #upx()
         assert_execute_console()
 
     logger.info('Purging unnecessary GTK+ files')
