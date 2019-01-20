@@ -373,7 +373,7 @@ def upx():
 
     logger.info('Compressing executables')
     #upx_files = recursive_glob('dist', ['*.exe', '*.dll', '*.pyd'])
-    upx_files = recursive_glob('dist', [''*sqlite*'])
+    upx_files = recursive_glob('dist', ('*sqlite*',))
     cmd = '{} {} {}'.format(UPX_EXE, UPX_OPTS, ' '.join(upx_files))
     run_cmd(cmd)
 
