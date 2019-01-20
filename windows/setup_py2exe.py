@@ -361,6 +361,9 @@ def strip():
 
 @count_size_improvement
 def upx():
+    logger.warning('UPX compression is disabled')
+    return
+
     if fast:
         logger.warning('Fast mode: Skipped executable with UPX')
         return
