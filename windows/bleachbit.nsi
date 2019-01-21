@@ -29,6 +29,7 @@
 
   ;Name and file
   !define prodname "BleachBit"
+  !define COMPANY_NAME "BleachBit" ; # used by NsisMultiUser
   Name "${prodname}"
 !ifdef NoTranslations
   OutFile "${prodname}-${VERSION}-setup-English.exe"
@@ -206,33 +207,20 @@ Section Core (Required)
     # uninstaller
     WriteUninstaller "$INSTDIR\uninstall.exe"
 
-    !insertmacro MULTIUSER_RegistryAddInstallInfo ; add registry keys
 
     SetOutPath "$INSTDIR\"
     CreateDirectory "$SMPROGRAMS\${prodname}"
     CreateShortCut "$SMPROGRAMS\${prodname}\Uninstall.lnk" "$INSTDIR\uninstall.exe"
 
     # register uninstaller in Add/Remove Programs
-    WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${prodname}" \
-        "DisplayName" "${prodname}"
-    WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${prodname}" \
-        "DisplayVersion" "${VERSION}"
-    WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${prodname}" \
+    !insertmacro MULTIUSER_RegistryAddInstallInfo ; add registry keys
+    WriteRegStr SHCTX "${MULTIUSER_INSTALLMODE_UNINSTALL_REGISTRY_KEY_PATH}$0" \
         "HelpLink" "https://www.bleachbit.org/help"
-    WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${prodname}" \
-        "NoModify" "1"
-    WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${prodname}" \
-        "NoRepair" "1"
-    WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${prodname}" \
-        "Publisher" "BleachBit"
-    WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${prodname}" \
-        "UninstallString" "$INSTDIR\uninstall.exe"
-    WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${prodname}" \
+    WriteRegStr SHCTX "${MULTIUSER_INSTALLMODE_UNINSTALL_REGISTRY_KEY_PATH}$0" \
         "URLInfoAbout" "https://www.bleachbit.org/"
-    WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${prodname}" \
+    WriteRegStr SHCTX "${MULTIUSER_INSTALLMODE_UNINSTALL_REGISTRY_KEY_PATH}$0" \
         "URLUpdateInfo" "https://www.bleachbit.org/download"
-    WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${prodname}" \
-        "QuietUninstallString" "$\"$INSTDIR\uninstall.exe$\" /S"
+    ; FIXME later: Restore QuietUninstallString
 SectionEnd
 
 
