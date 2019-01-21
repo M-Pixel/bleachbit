@@ -59,7 +59,7 @@
 ;
 ; See https://github.com/Drizin/NsisMultiUser
 ;
-!addplugindir /x86-ansi ".\NsisMultiUserAnsi\"
+!addplugindir /x86-ansi ".\NsisPluginsAnsi\"
 !addplugindir /x86-unicode ".\NsisPluginsUnicode\"
 !addincludedir ".\NsisInclude"
 !include UAC.nsh
